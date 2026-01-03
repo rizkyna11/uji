@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan variabel CSS */
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header dan Navigasi */
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Kontainer utama */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            min-height: 70vh;
+        }
+        
+        /* Halaman konten */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .page-header h1 {
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+        
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Home */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-top: 1.5rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        /* Profile */
+        .profile-content {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .profile-image {
+            flex: 1;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-info {
+            flex: 2;
+        }
+        
+        .profile-info h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .profile-details {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            min-width: 150px;
+            color: var(--secondary);
+        }
+        
+        /* Karya & Project */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background-color: var(--light);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        /* Media */
+        .media-tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background-color: transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--secondary);
+        }
+        
+        .tab-btn:hover {
+            background-color: var(--light);
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .media-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .media-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .media-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .audio-player {
+            background-color: var(--light);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .audio-player i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .doc-item {
+            padding: 1.5rem;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .doc-item i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsif */
+        @media (max-width: 992px) {
+            .hero, .profile-content {
+                flex-direction: column;
+            }
+            
+            .hero-image img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Navigasi -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo" data-page="home">
+                <i class="fas fa-code"></i> Portofolio
+            </a>
+            
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="profile">Profile</a></li>
+                <li><a href="#" class="nav-link" data-page="projects">Karya & Project</a></li>
+                <li><a href="#" class="nav-link" data-page="media">Media</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Kontainer utama untuk halaman dinamis -->
+    <main class="container">
+        <!-- Halaman Home -->
+        <section id="home" class="page active">
+            <div class="page-header">
+                <h1>Selamat Datang di Portofolio Saya</h1>
+                <p>Halaman utama yang menampilkan profil singkat dan sambutan</p>
+            </div>
+            
+            <div class="hero">
+                <div class="hero-text">
+                    <h2>Halo, Saya <span class="highlight">Rizky Nur Arliasyah</span></h2>
+                    <p>Saya adalah seorang <span class="highlight">Mahasiswa Sistem Informasi</span> </p>
+                    <p>Portofolio ini berisi kumpulan karya dan proyek yang pernah saya kerjakan.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="c:\Users\Rizky\Downloads\foto.jpg" alt="Foto Profil">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Halaman Profile -->
+        <section id="profile" class="page">
+            <div class="page-header">
+                <h1>Profile Saya</h1>
+                <p>Informasi lengkap tentang latar belakang.</p>
+            </div>
+            
+            <div class="profile-content">
+                <div class="profile-image">
+                    <img src="c:\Users\Rizky\Downloads\foto.jpg" alt="Foto Profil Detail">
+                </div>
+                <div class="profile-info">
+                    <h3>BIODATA</h3>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Nama Lengkap:</div>
+                            <div class="detail-value">Rizky Nur Arliasyah</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Universitas:</div>
+                            <div class="detail-value">Universitas Pamulang</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email:</div>
+                            <div class="detail-value">rizkyna896@gmail.com</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Lokasi:</div>
+                            <div class="detail-value">Jakarta, Indonesia</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Keahlian</h3>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Frontend:</div>
+                            <div class="detail-value">HTML, CSS, JavaScript</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Backend:</div>
+                            <div class="detail-value">Node.js, PHP, Laravel, MySQL, MongoDB</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Design:</div>
+                            <div class="detail-value">Figma, Adobe XD, Photoshop, Illustrator</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tools:</div>
+                            <div class="detail-value">Git, Docker, VS Code, Postman, NPM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Halaman Karya & Project -->
+        <section id="projects" class="page">
+            <div class="page-header">
+                <h1>Karya & Project</h1>
+                <p>Daftar karya dan proyek yang telah saya selesaikan</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="c:\Users\Rizky\Pictures\Screenshots\Screenshot (85).png" alt="E-commerce Website">
+                    </div>
+                    <div class="project-info">
+                        <h3>E-commerce Platform</h3>
+                        <p>Platform e-commerce lengkap dengan sistem pemesanan dan pembayaran</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="c:\Users\Rizky\Pictures\Screenshots\Screenshot (95).png" alt="Company Profile">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mockup Berita</h3>
+                        <p>Menampilkan Berita Terkini.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="c:\Users\Rizky\Pictures\Screenshots\Screenshot (68).png" alt="Task Management App">
+                    </div>
+                    <div class="project-info">
+                        <h3>User Interaction Dialog (Modal-based UI)</h3>
+                        <p>Alert dan Dialog Box adalah fitur pada JavaScript yang digunakan untuk melakukan interaksi langsung dengan pengguna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Halaman Media -->
+        <section id="media" class="page">
+            <div class="page-header">
+                <h1>Koleksi Media</h1>
+                <p>Kumpulan media tentang diri saya</p>
+            </div>
+            
+            <div class="media-tabs">
+                <button class="tab-btn active" data-tab="gambar">Gambar</button>
+                <button class="tab-btn" data-tab="video">Video</button>
+                <button class="tab-btn" data-tab="audio">Audio</button>
+                <button class="tab-btn" data-tab="dokumen">Dokumen</button>
+            </div>
+            
+            <div class="media-content">
+                <!-- Tab Gambar -->
+                <div id="gambar" class="tab-content active">
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <img src="c:\Users\Rizky\Downloads\Foto3.jpg" alt="Kode Programming">
+                        </div>
+                        <div class="media-item">
+                            <img src="c:\Users\Rizky\Downloads\Foto4.jpg" alt="UI Design">
+                        </div>
+                        <div class="media-item">
+                            <img src="c:\Users\Rizky\Downloads\Foto2.jpg" alt="Web Development">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Video -->
+                <div id="video" class="tab-content">
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <video controls>
+                                <source src="c:\Users\Rizky\Downloads\video perkenalan.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Audio -->
+                <div id="audio" class="tab-content">
+                    <div class="media-grid">
+                        <div class="media-item audio-player">
+                            <i class="fas fa-headphones"></i>
+                            <h4>Lagu Favorite</h4>
+                            <p>Wawancara tentang tren terkini dalam pengembangan web</p>
+                            <audio controls style="width: 100%; margin-top: 15px;">
+                                <source src="c:\Users\Rizky\Downloads\musik tugas 4.mp3" type="audio/mpeg">
+                                Browser Anda tidak mendukung tag audio.
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Dokumen -->
+                <div id="dokumen" class="tab-content">
+                    <div class="media-grid">
+                        <div class="media-item doc-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <h4>CV & Resume</h4>
+                                <p>Dokumen CV dan resume lengkap saya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/rizzz_na11?igsh=OW1wM3hjeDVrYXlo"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@iyanganz-l3w?si=aLNWZQgf03B9VMhv"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2023 Portofolio Rizky Nur Arliasyah. Semua hak dilindungi.</p>
+        <p>Dibuat dengan HTML, CSS, dan JavaScript</p>
+    </footer>
+
+    <script>
+        // JavaScript untuk navigasi dan interaktivitas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen navigasi
+            const navLinks = document.querySelectorAll('.nav-link');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-links');
+            const logo = document.querySelector('.logo');
+            
+            // Elemen halaman
+            const pages = document.querySelectorAll('.page');
+            
+            // Elemen tab media
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // Fungsi untuk mengganti halaman
+            function switchPage(pageId) {
+                // Sembunyikan semua halaman
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Tampilkan halaman yang dipilih
+                const activePage = document.getElementById(pageId);
+                activePage.classList.add('active');
+                
+                // Update status aktif navigasi
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Tutup menu navigasi di perangkat mobile
+                if (navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                }
+            }
+            
+            // Event listener untuk navigasi
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    switchPage(pageId);
+                });
+            });
+            
+            // Event listener untuk logo
+            logo.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage('home');
+            });
+            
+            // Event listener untuk toggle menu di perangkat mobile
+            menuToggle.addEventListener('click', function() {
+                navList.classList.toggle('active');
+            });
+            
+            // Fungsi untuk mengganti tab media
+            function switchTab(tabId) {
+                // Sembunyikan semua konten tab
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Tampilkan konten tab yang dipilih
+                const activeTab = document.getElementById(tabId);
+                activeTab.classList.add('active');
+                
+                // Update status aktif tab
+                tabBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-tab') === tabId) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Event listener untuk tab media
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Simulasi loading konten dinamis
+            console.log("Portofolio website telah dimuat dengan sukses!");
+        });
+    </script>
+</body>
+</html>
